@@ -9,5 +9,5 @@
 @endsection
 
 @section('footer')
-    hello
+    
 @endsection
