@@ -23,3 +23,5 @@ Route::get('/article/create', ['as'=> 'article.create', 'uses'=>'ArticleControll
 Route::get('/article/{id}', 'ArticleController@show');
 
 Route::post('/article/create', 'ArticleController@store');
+
+Route::get('/user/{id?}', 'UserController@show');

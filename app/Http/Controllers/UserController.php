@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
 use Illuminate\Http\Request;
+
+use App\User;
 use App\Http\Requests;
 
-
-class IndexController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-      $articles = Article::all();
-      // dd($articles);
-      return view('theme::home.index')->with(compact('articles'));
         //
     }
 
@@ -51,7 +48,9 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        // dd($user);
+        return view('theme::user.show')->with(compact('user'));
     }
 
     /**

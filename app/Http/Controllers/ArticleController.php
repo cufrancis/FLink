@@ -48,9 +48,9 @@ class ArticleController extends Controller
         $article = Article::create($data);
         
         if($article){
-          return $this->success(route('theme::article.create', ['id'  =>  $article->id]), "发布成功！");
+          return $this->success(route('website.index', ['id'  =>  $article->id]), "发布成功！");
         } else {
-          return $this->error(route('theme::home.index'), "链接发布失败， 请稍后再试或联系管理员");
+          return $this->error(route('article.create'), "链接发布失败， 请稍后再试或联系管理员");
         }
     }
 

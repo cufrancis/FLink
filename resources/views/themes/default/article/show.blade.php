@@ -8,7 +8,7 @@
 {{-- {{dd($article->authorInfo->name)}} --}}
 <p>Created_at {{ $article->updated_at }} </p>
 <p>updated_at:{{ $article->created_at }} </p>
-<p>Author: <a href="">{{ $article->authorInfo->name }}</a></p>
+<p>Author: <a href="{{ url('user', $article->authorInfo->id) }}">{{ $article->authorInfo->name }}</a></p>
 @endsection
 
 @section('footer')
