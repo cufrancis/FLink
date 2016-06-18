@@ -4,19 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use View;
+use Auth;
 use App\User;
 use App\Http\Requests;
 
 class UserController extends Controller
 {
+  
+    protected $user;
+  
+    public function __construct(Request $request) {
+      $userId = $request->route()->parameter('user_id');
+      $user = User::with('articleData')->find($userId);
+      
+      if (!$user)abort(404);
+      $this->user = $user;
+      View::share("userInfo", $user);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+      // dd($this->user->articleData);
+      
+      // 查看的是不是自己的信息
+      $who = ($this->user->id == Auth::user()->id ? '我' : '他');
+      // dd($user->getArticleInfo);
+      return view('theme::user.index')->with(compact('who'));
     }
 
     /**
@@ -85,5 +103,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function article(){
+      // dd($this->user->getArticleInfo);
+      return view('theme::user/article');
     }
 }

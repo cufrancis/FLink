@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->tinyInteger('gender')->nullable(); // 性别，0 女， 1 男 2 保密
             $table->date('birthday')->nullable(); // 生日
-            $table->string('desc')->nullable(); //个人简介
+            $table->string('desc')->nullable()->default('系统报了个错，召唤我来到了这里 <(▰˘◡˘▰)>'); //个人简介
             $table->rememberToken();
             $table->timestamps();
         });

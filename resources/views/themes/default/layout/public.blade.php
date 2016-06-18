@@ -64,6 +64,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/user', Auth::user()->id) }}"><i class="fa fa-btn"></i>我的主页</a></li>
                                 <li><a href="{{ url('/article/create') }}"><i class="fa fa-btn glyphicon glyphicon-plus"></i>Create</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>

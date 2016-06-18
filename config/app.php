@@ -156,6 +156,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ThemeServiceProvider::class,
+        // 用clean 函数
+        Mews\Purifier\PurifierServiceProvider::class,
+
 
 
     ],
@@ -203,6 +206,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
 
     ],
 
