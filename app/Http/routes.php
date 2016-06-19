@@ -23,11 +23,24 @@ Route::get('/link/create', ['as' => 'link.create', 'uses' => 'LinkController@cre
 Route::post('/link/create', 'LinkController@store');
 // 查看链接
 Route::get('/link/{link_id}', ['as' => 'link.detial', 'uses' => 'LinkController@show']);
-// 编辑链接
+// 修改链接
 Route::get('/link/{link_id}/edit', ['as' => 'link.edit', 'uses' => 'LinkController@edit']);
 Route::post('/link/{link_id}/update', 'LinkController@update');
 // 删除链接
 Route::get('/link/{link_id}/delete', ['as' => 'link.delete', 'uses' => 'LinkController@destroy']);
+
+
+// 创建文章
+Route::get('/article/create', ['as'=> 'article.create', 'uses'=>'ArticleController@create']);
+Route::post('/article/create', 'ArticleController@store');
+// 更新文章
+Route::post('article/{article_id}/update', 'ArticleController@update');
+// 删除文章
+Route::get('article/{article_id}/delete/', ['as' => 'article.delete', 'uses' =>'ArticleController@destroy']);
+
+Route::get('/article/{id}', 'ArticleController@show');
+// 用户编辑文章
+Route::get('/article/{article_id}/edit', 'ArticleController@edit');
 
 
 Route::get('/user/{user_id?}', 'UserController@index');

@@ -27,7 +27,12 @@ class Controller extends BaseController
         return redirect($url);
     }
 
-
+    /**
+     * 操作错误提示
+     * @param  string $url     string
+     * @param  string $message 消息内容
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector        跳转链接
+     */
     protected function error($url,$message)
     {
         Session::flash('message',$message);

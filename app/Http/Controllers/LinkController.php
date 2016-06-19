@@ -38,7 +38,7 @@ class LinkController extends Controller
 
     /**
      * 将用户提交的网址转换成链接，加上http头
-     * @param [type] $url 网址，
+     * @param string $url 网址，
      */
     public function addHead($url){
       if (!preg_match("/^(http|ftp):/", $url)){
