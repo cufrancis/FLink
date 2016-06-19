@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
+use Carbon\Carbon;
 use Auth;
 use App\Link;
 use App\Article;
@@ -131,5 +131,19 @@ class LinkController extends Controller
     {
       Link::destroy($id);
       return $this->success(route('user.link', ['id' => Auth::user()->id]), "文章删除成功！");  
+    }
+    
+    public function voteUp($link_id){
+        $link = new Link;
+        $link->voteUp($link_id);
+        return redirect()->back();
+        // return $this->success(url()->current(), '顶成功');
+    }
+    
+    public function voteDown($link_id){
+        $link = new Link;
+        $link->voteDown($link_id);
+        return redirect()->back();
+        // return $this->success(url()->current(), '顶成功');
     }
 }

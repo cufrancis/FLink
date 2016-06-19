@@ -1,4 +1,4 @@
-<?php
+`<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/', ['as'=>'website.index', 'uses'=> 'IndexController@index']);
 
+// 文章
 // 创建链接
 Route::get('/link/create', ['as' => 'link.create', 'uses' => 'LinkController@create']);
 Route::post('/link/create', 'LinkController@store');
@@ -28,21 +29,15 @@ Route::get('/link/{link_id}/edit', ['as' => 'link.edit', 'uses' => 'LinkControll
 Route::post('/link/{link_id}/update', 'LinkController@update');
 // 删除链接
 Route::get('/link/{link_id}/delete', ['as' => 'link.delete', 'uses' => 'LinkController@destroy']);
+// 顶
+Route::get('/link/{link_id}/voteUp', ['as' => 'link.voteUp', 'uses' => 'LinkController@voteUp']);
+// 踩
+Route::get('/link/{link_id}/voteDown', ['as' => 'link.voteDown', 'uses' => 'LinkController@voteDown']);
 
 
-// 创建文章
-Route::get('/article/create', ['as'=> 'article.create', 'uses'=>'ArticleController@create']);
-Route::post('/article/create', 'ArticleController@store');
-// 更新文章
-Route::post('article/{article_id}/update', 'ArticleController@update');
-// 删除文章
-Route::get('article/{article_id}/delete/', ['as' => 'article.delete', 'uses' =>'ArticleController@destroy']);
 
-Route::get('/article/{id}', 'ArticleController@show');
-// 用户编辑文章
-Route::get('/article/{article_id}/edit', 'ArticleController@edit');
-
-
-Route::get('/user/{user_id?}', 'UserController@index');
+// 用户
+// 用户主页
+Route::get('/user/{user_id?}', ['as' => 'user.index', 'uses' => 'UserController@index']);
 // 获取所发的链接信息
 Route::get('/user/{user_id?}/link', ['as' => 'user.link', 'uses' =>  'UserController@link']);

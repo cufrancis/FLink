@@ -1,17 +1,20 @@
 @extends('theme::layout.public')
 
 @section('content')
-<h4><a href="{{ $link->url }}" target="_blank">{{$link->title}}</a> <small>({{$link->url}})</small></h4>
+<h4><center><a href="{{ route('link.voteUp', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-up
+"></i></a> {{ $link->vote_up }} <a href="{{ route('link.voteDown', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-down
+"></i></a>  <a href="{{ $link->url }}" target="_blank">{{$link->title}}</a> <small>({{$link->url}})</small></center></h4>
+<br />
 
-{{ $link->created_at }} <a href="{{ url('user', $link->authorInfo->id) }}">{{ $link->authorInfo->name }}</a> 分享于
-{{-- <p>{{$article->content}} </p> --}}
+<p>{{$link->content}} </p>
 <hr />
-{{-- {{dd($article->authorInfo->name)}} --}}
-{{-- <p>Created_at {{ $article->created_at }} </p>
-<p>updated_at:{{ $article->updated_at }} </p> --}}
-{{-- <p>Author: <a href="{{ url('user', $article->authorInfo->id) }}">{{ $article->authorInfo->name }}</a></p> --}}
+
+<a href="{{ url('user', $link->userInfo->id) }}">{{ $link->userInfo->name }}</a> 分享于@if($link->created_at)
+    {{ $link->created_at->diffForHumans() }}
+@endif
 @endsection
 
 @section('footer')
-  <a href="{{url('/') }}">返回首页</a>
+    <hr />
+  <p><a href="{{url('/') }}">返回首页</a></p>
 @endsection
