@@ -16,9 +16,12 @@ class UserController extends Controller
   
     public function __construct(Request $request) {
       $userId = $request->route()->parameter('user_id');
-      $user = User::with('articleData')->find($userId);
+      $user = User::with('linkData')->find($userId);
       
-      if (!$user)abort(404);
+      if (!$user){
+        // dd("error");
+        abort(404);
+      }
       $this->user = $user;
       View::share("userInfo", $user);
     }
@@ -32,8 +35,13 @@ class UserController extends Controller
       // dd($this->user->articleData);
       
       // 查看的是不是自己的信息
-      $who = ($this->user->id == Auth::user()->id ? '我' : '他');
-      // dd($user->getArticleInfo);
+      if (Auth::check()){
+          $who = ($this->user->id == Auth::user()->id ? '我' : '他');
+      } else {
+        $who = '他';
+      }
+      
+    //   dd($this->user->linkData);
       return view('theme::user.index')->with(compact('who'));
     }
 
@@ -105,8 +113,13 @@ class UserController extends Controller
         //
     }
     
-    public function article(){
+    public function link($id){
       // dd($this->user->getArticleInfo);
-      return view('theme::user/article');
+      // dd($id);
+      // if (Auth::check() && Auth::user()->id === $id){
+      //   $url = url('article/'.$this->user->articleInfo.'')
+      //   // url('article/'.$article->id.'/edit')
+      // }
+      return view('theme::user/link');
     }
 }

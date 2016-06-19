@@ -3,7 +3,11 @@
 @section('content')
   <ul>
     @foreach($userInfo->articleData as $article)
-      <li><a href="{{ url('article/'.$article->id.'/edit') }}">{{ $article->title }}</a></li>
+      @if(Auth::check() && Auth::user()->id === $article->author_id)
+        <li><a href="{{ url('article/'.$article->id.'/edit') }}">{{ $article->title }}</a></li>
+      @else
+        <li><a href="{{ url('article/'.$article->id) }}">{{ $article->title }}</a></li>
+      @endif
     @endforeach
   </ul>
 @endsection

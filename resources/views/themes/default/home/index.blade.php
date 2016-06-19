@@ -2,8 +2,8 @@
 
 @section('content')
   <ul>
-  @foreach($articles as $article)
-    <li><a href="{{ url('/article', $article->id)}}">{{ $article->title }}</a></li>
+  @foreach($links as $link)
+    <li><a href="{{ url('/link', $link->id)}}">{{ $link->title }}</a></li>
   @endforeach
   </ul>
 @endsection

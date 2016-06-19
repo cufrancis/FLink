@@ -8,6 +8,6 @@
     <li>{{ $who }}的手机号：{{ $userInfo->mobile }}</li>
     <li>{{ $who }}的性别：{{ $userInfo->gender }}</li>
     <hr />
-    <li>{{ $who }}分享的连接：<a href="{{ url('user/'.$userInfo->id.'/article') }}">{{ count($userInfo->articleData) }}</a></li>
+    <li>{{ $who }}分享的连接：<a href="{{ url('user/'.$userInfo->id.'/link') }}">{{ count($userInfo->linkData) }}</a></li>
   </ul>
 @endsection

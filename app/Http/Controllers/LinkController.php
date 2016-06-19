@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
+use Auth;
+use App\Link;
 use App\Article;
 use App\Http\Requests;
 
-class ArticleController extends Controller
+class LinkController extends Controller
 {
-    // protected $article;
-    // 
-    // public function __construct(Request $request) {
-    //   $articleId = $request->route()->parameter('article_id');
-    //   $article = Article::find($articleId);
-    //   
-    //   if (!$article)abort(404);
-    //   $this->article = $article;
-    // }
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +19,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        // 
     }
 
     /**
@@ -35,7 +29,22 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('theme::article.create');
+      $action = [
+        'create',
+        'Create'
+      ];
+        return view('theme::link.create')->with(compact('action'));
+    }
+
+    /**
+     * 将用户提交的网址转换成链接，加上http头
+     * @param [type] $url 网址，
+     */
+    public function addHead($url){
+      if (!preg_match("/^(http|ftp):/", $url)){
+        return 'http://'.$url;
+      }
+      
     }
 
     /**
@@ -46,20 +55,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $data = [
           'title' =>  $request->title,
-          'link'  =>  $request->link,
+          'url'  =>  $this->addHead($request->url),
           'content' =>  $request->content,
-          'author_id' =>  $request->user()->id,
+          'user_id' =>  $request->user()->id,
         ];
-        // dd($data);
-        $article = Article::create($data);
+
+        $link = Link::create($data);
         
-        if($article){
-          return $this->success(route('website.index', ['id'  =>  $article->id]), "发布成功！");
+        if($link){
+          return $this->success(route('website.index', ['id'  =>  $link->id]), "发布成功！");
         } else {
-          return $this->error(route('article.create'), "链接发布失败， 请稍后再试或联系管理员");
+          return $this->error(route('link.create'), "链接发布失败， 请稍后再试或联系管理员");
         }
     }
 
@@ -71,8 +79,8 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Article::find($id);
-        return view('theme::article.show')->with(compact('article'));
+        $link = Link::find($id);
+        return view('theme::link.show')->with(compact('link'));
     }
 
     /**
@@ -83,12 +91,12 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $article = Article::find($id);
+        $link = Link::find($id);
         $action = [
-          $article->id.'/update', 
-          'Edit',
+          $link->id.'/update', 
+          'Update',
         ];
-        return view('theme::article/create')->with(compact('article', 'action'));
+        return view('theme::link/create')->with(compact('link', 'action'));
     }
 
     /**
@@ -100,19 +108,17 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
-        $article = Article::find($id);
-        if (!$article)abort(404);
-        if ($article->author_id !== $request->user()->id)abort(403);
+        $link = Link::find($id);
+        if (!$link)abort(404);
+        if ($link->user_id !== $request->user()->id)abort(403);
         $request->flash();
         
-        $article->title = trim($request->title);
-        $article->link = $request->link;
-        $article->content = clean($request->content);
+        $link->title = trim($request->title);
+        $link->url = $request->url;
+        $link->content = $request->content;
+        $link->save();
         
-        $article->save();
-        return $this->success(route('user.article.list', ['id' => $article->id]), "文章编辑成功！");
-        // if ($)
+        return $this->success(route('user.link', ['id' => $link->user_id]), "文章编辑成功！");
     }
 
     /**
@@ -123,6 +129,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Link::destroy($id);
+      return $this->success(route('user.link', ['id' => Auth::user()->id]), "文章删除成功！");  
     }
 }

@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
-    public function articleData(){
-      return $this->hasMany('App\Article', 'author_id', 'id');
+    public function linkData(){
+      return $this->hasMany('App\Link', 'user_id', 'id');
     }
 }

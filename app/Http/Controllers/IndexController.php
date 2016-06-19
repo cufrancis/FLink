@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Link;
 use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -16,9 +17,11 @@ class IndexController extends Controller
      */
     public function index()
     {
-      $articles = Article::all();
+      // $articles = Article::all();
+      $links = Link::all();
+      // dd($link);
       // dd($articles);
-      return view('theme::home.index')->with(compact('articles'));
+      return view('theme::home.index')->with(compact('links'));
         //
     }
 

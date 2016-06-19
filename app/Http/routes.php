@@ -18,19 +18,18 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/', ['as'=>'website.index', 'uses'=> 'IndexController@index']);
 
-// 创建文章
-Route::get('/article/create', ['as'=> 'article.create', 'uses'=>'ArticleController@create']);
-Route::post('/article/store', 'ArticleController@store');
-// 更新文章
-Route::post('article/{article_id}/update', 'ArticleController@update');
-
-Route::get('/article/{id}', 'ArticleController@show');
-// 用户编辑文章
-Route::get('/article/{article_id}/edit', 'ArticleController@edit');
-
+// 创建链接
+Route::get('/link/create', ['as' => 'link.create', 'uses' => 'LinkController@create']);
+Route::post('/link/create', 'LinkController@store');
+// 查看链接
+Route::get('/link/{link_id}', ['as' => 'link.detial', 'uses' => 'LinkController@show']);
+// 编辑链接
+Route::get('/link/{link_id}/edit', ['as' => 'link.edit', 'uses' => 'LinkController@edit']);
+Route::post('/link/{link_id}/update', 'LinkController@update');
+// 删除链接
+Route::get('/link/{link_id}/delete', ['as' => 'link.delete', 'uses' => 'LinkController@destroy']);
 
 
 Route::get('/user/{user_id?}', 'UserController@index');
 // 获取所发的链接信息
-Route::get('/user/{user_id?}/article', [
-  'as' => 'user.article.list', 'uses' =>  'UserController@article']);
+Route::get('/user/{user_id?}/link', ['as' => 'user.link', 'uses' =>  'UserController@link']);
