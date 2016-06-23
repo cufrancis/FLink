@@ -9,10 +9,12 @@
 <p>{{$link->content}} </p>
 <hr />
 
-<a href="{{ url('user', $link->userInfo->id) }}">{{ $link->userInfo->name }}</a> 分享于@if($link->created_at)
-    {{ $link->created_at->diffForHumans() }}
-@endif
+@if($link->created_at){{ $link->created_at->diffForHumans() }}@endif <a href="{{ url('user', $link->userInfo->id) }}">{{ $link->userInfo->name }}</a> 分享于 @foreach($link->topicsInfo as $topic)
+    <a href=""><span class="label label-primary">{{ $topic->name }}</span></a>
+
+@endforeach
 @endsection
+
 
 @section('footer')
     <hr />

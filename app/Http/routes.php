@@ -34,10 +34,11 @@ Route::get('/link/{link_id}/voteUp', ['as' => 'link.voteUp', 'uses' => 'LinkCont
 // 踩
 Route::get('/link/{link_id}/voteDown', ['as' => 'link.voteDown', 'uses' => 'LinkController@voteDown']);
 
-
-
 // 用户
 // 用户主页
 Route::get('/user/{user_id?}', ['as' => 'user.index', 'uses' => 'UserController@index']);
 // 获取所发的链接信息
 Route::get('/user/{user_id?}/link', ['as' => 'user.link', 'uses' =>  'UserController@link']);
+
+// 后台管理
+Route::get('/admin', ['as' => 'website.admin', 'uses' => 'AdminController@index']);

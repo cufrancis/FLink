@@ -9,9 +9,25 @@ class Link extends Model
 {
     protected $fillable=['title', 'url', 'user_id'];
     
+    /**
+     * 获取链接所属用户的信息
+     * @return [type] [description]
+     */
     public function userInfo(){
       return $this->hasOne('App\User', 'id', 'user_id');
     }
+    
+    /**
+     * 获取链接的话题信息，多对多关系
+     * @return [type] [description]
+     */
+    public function topicsInfo(){
+        
+        // 第一个参数是我们最终希望访问的模型的名称，第二个参数是中间模型的名称
+        // 第三个参数是中间模型的外键名，第四个参数是最终模型的外键名
+        return $this->belongsToMany('App\Topics', 'topic_link', 'link_id', 'topic_id');
+    }
+    
     
     public function voteUp($link_id){
         DB::table('links')->where('id', $link_id)->increment('vote_up', 1);

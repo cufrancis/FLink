@@ -24,7 +24,7 @@ class CreateLinksTable extends Migration
             $table->integer('view_count')->unsiged()->default(0); // 链接评论查看数量
             $table->integer('click_count')->unsiged()->default(0); // 链接点击(查看)数量
             $table->integer('comment_count')->unsiged()->default(0); // 链接总评论数
-            $table->string('topics'); // 标签，以分号隔开
+            $table->string('topics')->default(''); // 标签，以分号隔开
             $table->string('title'); // 链接标题
             $table->string('url'); // 超链接
             $table->string('content'); // 链接内容

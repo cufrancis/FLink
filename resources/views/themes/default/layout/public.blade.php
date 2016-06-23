@@ -47,7 +47,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Index</a></li>
+                    <li><a href="{{ route('website.index') }}">Index</a></li>
                     <li><a href="{{ url('/home') }}">Home</a></li>
                 </ul>
 
@@ -66,6 +66,9 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/user', Auth::user()->id) }}"><i class="fa fa-btn"></i>我的主页</a></li>
                                 <li><a href="{{ route('link.create') }}"><i class="fa fa-btn glyphicon glyphicon-plus"></i>Create</a></li>
+                                @if(Auth::user()->permissions == 9)
+                                    <li><a href="{{ route('website.admin') }}">后台管理</li>
+                                @endif
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

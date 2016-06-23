@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 128)->unique();
             $table->string('mobile', 24)->index()->nullable();
             $table->string('password');
+            $table->integer('permissions')->default(0); // 权限值,0：普通用户 9:管理员
             $table->tinyInteger('gender')->nullable(); // 性别，0 女， 1 男 2 保密
             $table->date('birthday')->nullable(); // 生日
             $table->string('user_pic')->nullable(); // 用户头像

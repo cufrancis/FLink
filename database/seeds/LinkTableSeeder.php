@@ -13,12 +13,14 @@ class LinkTableSeeder extends Seeder
             'url'  =>  'http://www.baidu.com',
             'content' =>  '俗称百毒，不过国内使用率比较高test',
             'user_id' =>  1,
+            'topics'    =>  '1,2',
           ],
           [
             'title' =>  'Google',
             'url'  =>  'http://www.google.com',
             'content' =>  '全球最大的互联网公司，以搜索引擎起家',
             'user_id' =>  1,
+            'topics'    =>  1,
           ],
         ]);
     }

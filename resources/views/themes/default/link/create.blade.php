@@ -25,6 +25,14 @@
           </div>
         </div>
         
+        <!-- Single button -->
+        话题分类：
+        <div class="form-group">
+            <select multiple class="form-control" name="topics"> 
+              <option value=""></option> 
+            </select>
+        </div>
+        
         <div class="form-group">
             <div class="col-md-6 col-md-offset-10">
               @if($action[1] == 'Update')

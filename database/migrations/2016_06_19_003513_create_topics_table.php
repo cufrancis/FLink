@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopicTable extends Migration
+class CreateTopicsTable extends Migration
 {
     /**
      * 话题表
@@ -12,7 +12,7 @@ class CreateTopicTable extends Migration
      */
     public function up()
     {
-        Schema::create('topic', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->increments('id')->unsiged();
             $table->string('name'); // 话题名称
             $table->string('name_lower'); // 话题名称小写，唯一索引
@@ -32,6 +32,6 @@ class CreateTopicTable extends Migration
      */
     public function down()
     {
-        Schema::drop('topic');
+        Schema::drop('topics');
     }
 }

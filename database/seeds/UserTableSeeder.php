@@ -16,6 +16,7 @@ class UserTableSeeder extends Seeder
           'name'  =>  'cufrancis',
           'email' =>  'cufrancis@163.com',
           'password'  =>  bcrypt('041000lxj'),
+          'permissions' =>  9,
         ]);
     }
 }

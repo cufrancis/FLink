@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
+use App\Topics;
 use Auth;
 use App\Link;
 use App\Article;
@@ -80,6 +81,7 @@ class LinkController extends Controller
     public function show($id)
     {
         $link = Link::find($id);
+        // dd($link->topicsInfo);
         return view('theme::link.show')->with(compact('link'));
     }
 
@@ -96,6 +98,13 @@ class LinkController extends Controller
           $link->id.'/update', 
           'Update',
         ];
+        $topics = Topics::all()->toArray();
+        foreach ($topics as $tag) {
+            if (isset($tag['topics']) && $tag['topics'] != '' ){
+                // 分割话题获取数据
+            }
+        }
+        dd($topics);
         return view('theme::link/create')->with(compact('link', 'action'));
     }
 
