@@ -9,9 +9,9 @@
 <p>{{$link->content}} </p>
 <hr />
 
-@if($link->created_at){{ $link->created_at->diffForHumans() }}@endif <a href="{{ url('user', $link->userInfo->id) }}">{{ $link->userInfo->name }}</a> 分享于 @foreach($link->topicsInfo as $topic)
-    <a href=""><span class="label label-primary">{{ $topic->name }}</span></a>
-
+@if($link->created_at){{ $link->created_at->diffForHumans() }}@endif <a href="{{ url('user', $link->userInfo->id) }}">{{ $link->userInfo->name }}</a> 分享于 
+@foreach($link->tagsInfo as $tag)
+    <span class="label label-primary">{{ $tag->name }}</span>
 @endforeach
 @endsection
 

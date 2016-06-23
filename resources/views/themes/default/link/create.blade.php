@@ -29,7 +29,10 @@
         话题分类：
         <div class="form-group">
             <select multiple class="form-control" name="topics"> 
-              <option value=""></option> 
+                @foreach($topics as $topic)
+                    <option value="">{{ $topic->name }}</option> 
+                @endforeach
+              
             </select>
         </div>
         

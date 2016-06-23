@@ -28,6 +28,10 @@ class Link extends Model
         return $this->belongsToMany('App\Topics', 'topic_link', 'link_id', 'topic_id');
     }
     
+    public function tagsInfo(){
+        return $this->belongsToMany('App\Tag', 'link_tags', 'link_id', 'tag_id');
+    }
+    
     
     public function voteUp($link_id){
         DB::table('links')->where('id', $link_id)->increment('vote_up', 1);

@@ -34,7 +34,9 @@ class LinkController extends Controller
         'create',
         'Create'
       ];
-        return view('theme::link.create')->with(compact('action'));
+      $topics = Topics::all();
+    //   dd($topics);
+      return view('theme::link.create')->with(compact('action', 'topics'));
     }
 
     /**
@@ -81,7 +83,7 @@ class LinkController extends Controller
     public function show($id)
     {
         $link = Link::find($id);
-        // dd($link->topicsInfo);
+        // dd($link->tagsInfo);
         return view('theme::link.show')->with(compact('link'));
     }
 
