@@ -25,7 +25,7 @@ class Link extends Model
         
         // 第一个参数是我们最终希望访问的模型的名称，第二个参数是中间模型的名称
         // 第三个参数是中间模型的外键名，第四个参数是最终模型的外键名
-        return $this->belongsToMany('App\Topics', 'topic_link', 'link_id', 'topic_id');
+        return $this->belongsToMany('App\Topics', 'link_topics', 'link_id', 'topic_id');
     }
     
     public function tagsInfo(){

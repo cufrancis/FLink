@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TopicLinkTableSeeder extends Seeder
+class LinkTopicsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class TopicLinkTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('topic_link')->insert([
+        DB::table('link_topics')->insert([
             [
                 'topic_id'  =>  1,
                 'link_id'   =>  1,

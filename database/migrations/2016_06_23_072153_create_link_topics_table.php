@@ -3,16 +3,16 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopicLinkTable extends Migration
+class CreateLinkTopicsTable extends Migration
 {
     /**
-     * 标签与链接表关联
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('topic_link', function (Blueprint $table) {
+        Schema::create('link_topics', function (Blueprint $table) {
             $table->bigInteger('topic_id')->unsiged()->default(0)->index(); // 标签id
             $table->bigInteger('link_id')->unsiged()->default(0)->index(); // 链接id
             // $table->timestamps();
@@ -26,6 +26,6 @@ class CreateTopicLinkTable extends Migration
      */
     public function down()
     {
-        Schema::drop('topic_link');
+        Schema::drop('link_topics');
     }
 }
