@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Debugbar;
 use App\Link;
 use App\Article;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class IndexController extends Controller
     public function index()
     {
       $links = Link::all();
+        debug($links);
       return view('theme::home.index')->with(compact('links'));
         //
     }

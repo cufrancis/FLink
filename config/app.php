@@ -158,6 +158,10 @@ return [
         App\Providers\ThemeServiceProvider::class,
         // 用clean 函数
         Mews\Purifier\PurifierServiceProvider::class,
+        
+        Collective\Html\HtmlServiceProvider::class, // Ｆorm
+        Barryvdh\Debugbar\ServiceProvider::class, // 调试
+
 
 
 
@@ -207,7 +211,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
-
+        
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

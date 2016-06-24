@@ -1,5 +1,20 @@
 @extends('theme::layout.public')
 
+@section('header')
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+@endsection
+
+@section('footer')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+       $(function() {
+           $(".js-example-basic-multiple").select2({
+               placeholder: "添加标签"
+           });
+       });
+   </script>
+@endsection
 
 @section('content')
   {{-- {{dd($link)}} --}}
@@ -25,16 +40,26 @@
           </div>
         </div>
         
-        <!-- Single button -->
-        话题分类：
         <div class="form-group">
+            {!! Form::label('topics_list','选择话题') !!}
+            {!! Form::select('topics_list[]',$topics,null,['class'=>'form-control js-example-basic-multiple','multiple'=>'multiple']) !!}
+        </div>
+        
+        {{-- <div class="form-group">
+            <label for="tags" class="sr-only">标签</label>
+            <input id="tags" type="text" name="tags" class="form-control input-lg" placeholder="输入标签，多个请用逗号隔开" value="@if(isset($link_tags)){{ $link_tags }}@endif"/>
+        </div> --}}
+        
+        <!-- Single button -->
+        {{-- 话题分类： --}}
+        {{-- <div class="form-group">
             <select multiple class="form-control" name="topics"> 
                 @foreach($topics as $topic)
                     <option value="">{{ $topic->name }}</option> 
                 @endforeach
               
             </select>
-        </div>
+        </div> --}}
         
         <div class="form-group">
             <div class="col-md-6 col-md-offset-10">

@@ -23,7 +23,12 @@ class TopicTableSeeder extends Seeder
                 'name'  =>  'Technology',
                 'desc'  =>  '技术',
                 'name_lower'    =>  $pinyin->permalink(strtolower('Technology')),
-            ]
+            ],
+            [
+                'name'  =>  'Github',
+                'desc'  =>  '所有和Github有关的内容',
+                'name_lower'    =>  $pinyin->permalink(strtolower('Github')),
+            ],
         ]);
     }
 }

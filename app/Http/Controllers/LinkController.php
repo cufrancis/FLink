@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
-use App\Topics;
+use App\Topic;
 use Auth;
 use App\Link;
-use App\Article;
 use App\Http\Requests;
+use App\Tag;
 
 class LinkController extends Controller
 {
@@ -34,7 +34,9 @@ class LinkController extends Controller
         'create',
         'Create'
       ];
-      $topics = Topics::all();
+      $topics = Topic::lists('name', 'id');
+    //   $tags = Tag::lists('name', 'id');
+      
     //   dd($topics);
       return view('theme::link.create')->with(compact('action', 'topics'));
     }
@@ -58,6 +60,7 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->tag_list);
         $data = [
           'title' =>  $request->title,
           'url'  =>  $this->addHead($request->url),
@@ -66,6 +69,7 @@ class LinkController extends Controller
         ];
 
         $link = Link::create($data);
+        $link->topicss()->attach($request->topics_list);
         
         if($link){
           return $this->success(route('website.index', ['id'  =>  $link->id]), "发布成功！");
@@ -83,7 +87,6 @@ class LinkController extends Controller
     public function show($id)
     {
         $link = Link::find($id);
-        // dd($link->tagsInfo);
         return view('theme::link.show')->with(compact('link'));
     }
 
@@ -96,18 +99,26 @@ class LinkController extends Controller
     public function edit($id)
     {
         $link = Link::find($id);
+
         $action = [
           $link->id.'/update', 
           'Update',
         ];
-        $topics = Topics::all()->toArray();
-        foreach ($topics as $tag) {
-            if (isset($tag['topics']) && $tag['topics'] != '' ){
-                // 分割话题获取数据
+        $tmp = $link->tags->toArray();
+
+        $link_tags = '';
+        for ($i=0; $i < count($tmp); $i++) { 
+            
+            $link_tags .= $tmp[$i]['name'];
+            if (isset($tmp[$i+1]['name'])) {
+                $link_tags .= ',';
             }
         }
-        dd($topics);
-        return view('theme::link/create')->with(compact('link', 'action'));
+        foreach ($link->topicss as $topicInfo) {
+            $topics[]['name'] = $topicInfo->name;
+        }
+        
+        return view('theme::link/create')->with(compact('link', 'action', 'link_tags', 'topics'));
     }
 
     /**
@@ -119,10 +130,14 @@ class LinkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $link = Link::find($id);
+        // dd($request->tags);
+        $linkModel = new Link();
+        $link = $linkModel->find($id);
         if (!$link)abort(404);
         if ($link->user_id !== $request->user()->id)abort(403);
         $request->flash();
+        
+        // $linkModel->updateTags($request->tags, $id);
         
         $link->title = trim($request->title);
         $link->url = $request->url;

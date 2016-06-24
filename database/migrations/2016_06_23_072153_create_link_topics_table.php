@@ -13,9 +13,12 @@ class CreateLinkTopicsTable extends Migration
     public function up()
     {
         Schema::create('link_topics', function (Blueprint $table) {
-            $table->bigInteger('topic_id')->unsiged()->default(0)->index(); // 标签id
-            $table->bigInteger('link_id')->unsiged()->default(0)->index(); // 链接id
-            // $table->timestamps();
+            $table->increments('id')->unsigned();
+            $table->integer('link_id')->unsigned()->index(); // 链接id
+            $table->foreign('link_id')->references('id')->on('links')->onDelete('cascade');
+            $table->integer('topic_id')->unsigned()->index(); // 标签id
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

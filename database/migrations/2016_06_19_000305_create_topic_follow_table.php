@@ -13,8 +13,8 @@ class CreateTopicFollowTable extends Migration
     public function up()
     {
         Schema::create('topcic_follow', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsiged()->default(0)->index(); // 用户的id
-            $table->bigInteger('topic_id')->unsiged()->default(0)->index(); // topic的id
+            $table->bigInteger('user_id')->unsigned()->default(0)->index(); // 用户的id
+            $table->bigInteger('topic_id')->unsigned()->default(0)->index(); // topic的id
             $table->timestamp('create_time'); // 关注的时刻
         });
     }

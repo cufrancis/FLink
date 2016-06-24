@@ -12,14 +12,9 @@ class LinkTopicsTableSeeder extends Seeder
     public function run()
     {
         DB::table('link_topics')->insert([
-            [
-                'topic_id'  =>  1,
-                'link_id'   =>  1,
-            ],
-            [
-                'topics_id' =>  2,
-                'link_id'   =>  1,
-            ],
+            ['link_id'  =>  1, 'topic_id' =>  1],
+            ['link_id'  =>  1, 'topic_id' =>  2],
+            ['link_id'  =>  2, 'topic_id' =>  3],
         ]);
     }
 }

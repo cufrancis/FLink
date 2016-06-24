@@ -15,6 +15,7 @@ class TagTableSeeder extends Seeder
             ['name'  =>  'web'],
             ['name' =>  'html'],
             ['name' =>  'Chrome'],
+            ['name' =>  'github'],
         ]);
     }
 }

@@ -13,17 +13,17 @@ class CreateLinksTable extends Migration
     public function up()
     {
         Schema::create('links', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsiged()->index(); // 用户id
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned()->index(); // 用户id
             $table->integer('status')->default(0); // 链接的状态(0:正常， 3 删除)
             // $table->integer('content_type')->default(0); // 内容类型
             // $table->timestamp('create_time')->index(); // 创建时间
-            $table->integer('vote_up')->unsiged()->default(0); // 顶的数量
-            $table->integer('vote_down')->unsiged()->default(0); // 踩的数量
+            $table->integer('vote_up')->unsigned()->default(0); // 顶的数量
+            $table->integer('vote_down')->unsigned()->default(0); // 踩的数量
             $table->decimal('reddit_score', 28, 10); // 链接得分
-            $table->integer('view_count')->unsiged()->default(0); // 链接评论查看数量
-            $table->integer('click_count')->unsiged()->default(0); // 链接点击(查看)数量
-            $table->integer('comment_count')->unsiged()->default(0); // 链接总评论数
+            $table->integer('view_count')->unsigned()->default(0); // 链接评论查看数量
+            $table->integer('click_count')->unsigned()->default(0); // 链接点击(查看)数量
+            $table->integer('comment_count')->unsigned()->default(0); // 链接总评论数
             $table->string('topics')->default(''); // 标签，以分号隔开
             $table->string('title'); // 链接标题
             $table->string('url'); // 超链接
