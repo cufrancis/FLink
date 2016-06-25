@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Setting;
 use App\Http\Requests;
 
 class AdminController extends Controller
@@ -15,7 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        // Setting()->get('website_name');
+        return view('adminTheme::index.index');
     }
 
     /**

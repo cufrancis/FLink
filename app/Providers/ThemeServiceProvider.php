@@ -14,12 +14,19 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot(View $view)
     {
+        $adminTheme = "test";
+        $view->addNameSpace('adminTheme', [
+            base_path() . "/resources/views/adminTheme/$adminTheme",
+            base_path() . "/resources/views/adminTheme/default",
+        ]);
         // 主题
         $theme = "default";
         $view->addNameSpace('theme', [
           base_path(). "/resources/views/themes/$theme",
           base_path(). "/resources/views/themes/default",
         ]);
+        
+
     }
 
     /**

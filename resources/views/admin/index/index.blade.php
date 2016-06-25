@@ -1,0 +1,1 @@
+@extends('adminTheme::layout.public')

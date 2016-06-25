@@ -41,4 +41,5 @@ Route::get('/user/{user_id?}', ['as' => 'user.index', 'uses' => 'UserController@
 Route::get('/user/{user_id?}/link', ['as' => 'user.link', 'uses' =>  'UserController@link']);
 
 // 后台管理
-Route::get('/admin', ['as' => 'website.admin', 'uses' => 'AdminController@index']);
+Route::get('/admin', ['as' => 'website.admin.index', 'uses' => 'AdminController@index']);
+Route::get('/admin/create/topics', ['as' => 'admin.topics.create', 'uses' => 'AdminController@create']);
