@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
+use Route;
 use App\Topic;
 use Auth;
 use App\Link;
@@ -30,10 +31,11 @@ class LinkController extends Controller
      */
     public function create()
     {
-      $action = [
-        'create',
-        'Create'
-      ];
+    //   $action = [
+    //     'create',
+    //     'Create'
+    //   ];
+      $action = Route::currentRouteName(); // 获取当前路由的名称
       $topics = Topic::lists('name', 'id');
     //   $tags = Tag::lists('name', 'id');
       
@@ -99,26 +101,20 @@ class LinkController extends Controller
     public function edit($id)
     {
         $link = Link::find($id);
+        $date = new Carbon($link->published_at);
+        // dd($date);
 
-        $action = [
-          $link->id.'/update', 
-          'Update',
-        ];
-        $tmp = $link->tags->toArray();
-
-        $link_tags = '';
-        for ($i=0; $i < count($tmp); $i++) { 
-            
-            $link_tags .= $tmp[$i]['name'];
-            if (isset($tmp[$i+1]['name'])) {
-                $link_tags .= ',';
-            }
-        }
-        foreach ($link->topicss as $topicInfo) {
-            $topics[]['name'] = $topicInfo->name;
-        }
+        // $action = [$link->id.'/update', 'Update'];
+        // $action = Route::all(); // 获取当前路由的名称
+        // dd($action);
+        $topics = Topic::lists('name', 'id');
+        // dd($topics);
         
-        return view('theme::link/create')->with(compact('link', 'action', 'link_tags', 'topics'));
+        // foreach ($link->topicss as $topicInfo) {
+        //     $topics[]['name'] = $topicInfo->name;
+        // }
+        
+        return view('theme::link/edit')->with(compact('link', 'action', 'topics'));
     }
 
     /**
@@ -130,19 +126,21 @@ class LinkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->tags);
-        $linkModel = new Link();
-        $link = $linkModel->find($id);
+        // dd($request);
+        // $linkModel = new Link();
+        $link = Link::find($id);
         if (!$link)abort(404);
         if ($link->user_id !== $request->user()->id)abort(403);
         $request->flash();
         
         // $linkModel->updateTags($request->tags, $id);
+        $link->update($request->except('id'));
+        $link->topicss()->sync($request->topics_list);
         
-        $link->title = trim($request->title);
-        $link->url = $request->url;
-        $link->content = $request->content;
-        $link->save();
+        // $link->title = trim($request->title);
+        // $link->url = $request->url;
+        // $link->content = $request->content;
+        // $link->save();
         
         return $this->success(route('user.link', ['id' => $link->user_id]), "文章编辑成功！");
     }

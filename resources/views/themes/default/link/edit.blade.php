@@ -17,10 +17,14 @@
 @endsection
 
 @section('content')
+  {{-- {{dd($link)}} --}}
+  {{-- {{dd($action)}} --}}
   <div class="wrap publish">
     <div class="container">
       
-      <form action="{{ route('link.create') }}" method="POST" role="form">
+      {{-- 可以自动获取表单初始值 --}}
+      {!! Form::model($link, ['route' => ['link.edit', $link->id]]) !!} 
+      <form action="{{ route('link.edit', ['id' => $link->id]) }}" method="POST" role="form">
         {!! csrf_field() !!}
         
         <div class="form-group">
@@ -35,8 +39,13 @@
         
         <div class="form-group">
           <div id="questionText" class="editor">
-            <textarea class="mono form-control wmd-input tabIndent" rows="5" placeholder="简介，尽量精简" name="content">@if(isset($link)){{ $link->content  }}@endif</textarea>
+              {!! Form::textarea('content', $link->content, ['class' => 'mono form-control wmd-input tabIndent', 'placeholder' => '简介']) !!}
           </div>
+        </div>
+        
+        <div class="form-group">
+            {!! Form::label('published_at', '发布日期') !!}
+            {!! Form::input('date', 'published_at', $link->published_at->format('Y-m-d'), ['class' => 'form-control']) !!}
         </div>
         
         <div class="form-group">
@@ -44,35 +53,17 @@
             {!! Form::select('topics_list[]',$topics,null,['class'=>'form-control js-example-basic-multiple','multiple'=>'multiple']) !!}
         </div>
         
-        {{-- <div class="form-group">
-            <label for="tags" class="sr-only">标签</label>
-            <input id="tags" type="text" name="tags" class="form-control input-lg" placeholder="输入标签，多个请用逗号隔开" value="@if(isset($link_tags)){{ $link_tags }}@endif"/>
-        </div> --}}
-        
-        <!-- Single button -->
-        {{-- 话题分类： --}}
-        {{-- <div class="form-group">
-            <select multiple class="form-control" name="topics"> 
-                @foreach($topics as $topic)
-                    <option value="">{{ $topic->name }}</option> 
-                @endforeach
-              
-            </select>
-        </div> --}}
-        
         <div class="form-group">
             <div class="col-md-6 col-md-offset-10">
-              @if($action[1] == 'Update')
                   <a href="{{ url('link/'.$link->id.'/delete') }}">删除</a>
-              @endif
               
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-btn glyphicon glyphicon-floppy-saved"></i> {{ $action[1] }}
+                    <i class="fa fa-btn glyphicon glyphicon-floppy-saved"></i> 更新
                 </button>
             </div>
         </div>
         
-  </form>
+  {!! Form::close() !!}
 </div>
 </div>
 @endsection

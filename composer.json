@@ -10,7 +10,6 @@
         "mews/purifier": "^2.0",
         "overtrue/pinyin": "~3.0",
         "laravelcollective/html": "5.2.*",
-        "barryvdh/laravel-debugbar": "^2.2",
         "maximebf/debugbar": "1.*"
     },
     "require-dev": {

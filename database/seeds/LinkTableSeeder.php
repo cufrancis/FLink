@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class LinkTableSeeder extends Seeder
 {
@@ -14,6 +15,9 @@ class LinkTableSeeder extends Seeder
             'content' =>  '俗称百毒，不过国内使用率比较高test',
             'user_id' =>  1,
             'topics'    =>  '1,2',
+            'published_at'  =>  Carbon::now(),
+            'created_at'    =>  Carbon::now(),
+            'updated_at'  =>  Carbon::now(),
           ],
           [
             'title' =>  'Google',
@@ -21,7 +25,9 @@ class LinkTableSeeder extends Seeder
             'content' =>  '全球最大的互联网公司，以搜索引擎起家',
             'user_id' =>  1,
             'topics'    =>  1,
-          ],
+            'published_at'  =>  Carbon::now(),
+            'created_at'    =>  Carbon::now(),
+            'updated_at'  =>  Carbon::now(),          ],
         ]);
     }
 }

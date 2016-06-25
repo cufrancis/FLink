@@ -160,7 +160,6 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         
         Collective\Html\HtmlServiceProvider::class, // Ｆorm
-        Barryvdh\Debugbar\ServiceProvider::class, // 调试
 
 
 
@@ -214,7 +213,6 @@ return [
         
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Link extends Model
 {
     protected $fillable=['title', 'url', 'user_id'];
+    protected $dates = ['published_at', 'created_at'];
     
     /**
      * 根据传入的tag处理
@@ -46,6 +47,14 @@ class Link extends Model
         
         // $tmp->tagsInfo()->attach($string[0]);
         dd($string);
+    }
+     
+    /**
+     * 获取Link所在的话题
+     * @return [type] [description]
+     */
+    public function getTopicsListAttribute() {
+        return $this->topicss->lists('id')->all();
     }
     
     /**

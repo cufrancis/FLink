@@ -12,8 +12,8 @@
                 <a href="{{ url('/link', $link->id)}}">{{ $link->title }}</a>
             </h4>
         </li>
-        @if($link->created_at)
-            {{ $link->created_at->diffForHumans() }}
+        @if($link->published_at)
+            {{ $link->published_at->diffForHumans() }}
         @endif
          <a href="{{ route('user.index', $link->userInfo->id) }}">{{ $link->userInfo->name }}</a> 分享于
     </div>

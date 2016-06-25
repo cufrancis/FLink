@@ -19,7 +19,6 @@ class IndexController extends Controller
     public function index()
     {
       $links = Link::all();
-        debug($links);
       return view('theme::home.index')->with(compact('links'));
         //
     }

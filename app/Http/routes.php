@@ -26,7 +26,7 @@ Route::post('/link/create', 'LinkController@store');
 Route::get('/link/{link_id}', ['as' => 'link.detial', 'uses' => 'LinkController@show']);
 // 修改链接
 Route::get('/link/{link_id}/edit', ['as' => 'link.edit', 'uses' => 'LinkController@edit']);
-Route::post('/link/{link_id}/update', 'LinkController@update');
+Route::post('/link/{link_id}/edit', 'LinkController@update');
 // 删除链接
 Route::get('/link/{link_id}/delete', ['as' => 'link.delete', 'uses' => 'LinkController@destroy']);
 // 顶

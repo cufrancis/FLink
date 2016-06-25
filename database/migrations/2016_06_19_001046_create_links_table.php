@@ -18,8 +18,8 @@ class CreateLinksTable extends Migration
             $table->integer('status')->default(0); // 链接的状态(0:正常， 3 删除)
             // $table->integer('content_type')->default(0); // 内容类型
             // $table->timestamp('create_time')->index(); // 创建时间
-            $table->integer('vote_up')->unsigned()->default(0); // 顶的数量
-            $table->integer('vote_down')->unsigned()->default(0); // 踩的数量
+            $table->integer('vote_up')->default(0); // 顶的数量
+            $table->integer('vote_down')->default(0); // 踩的数量
             $table->decimal('reddit_score', 28, 10); // 链接得分
             $table->integer('view_count')->unsigned()->default(0); // 链接评论查看数量
             $table->integer('click_count')->unsigned()->default(0); // 链接点击(查看)数量
@@ -29,6 +29,7 @@ class CreateLinksTable extends Migration
             $table->string('url'); // 超链接
             $table->string('content'); // 链接内容
             $table->timestamps();
+            $table->timestamp('published_at');
         });
     }
 
