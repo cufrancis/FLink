@@ -20,7 +20,7 @@
   <div class="wrap publish">
     <div class="container">
       
-      <form action="{{ route('link.create') }}" method="POST" role="form">
+      <form action="{{ route('website.link.create') }}" method="POST" role="form">
         {!! csrf_field() !!}
         
         <div class="form-group">
@@ -59,7 +59,7 @@
               
             </select>
         </div> --}}
-        
+                
         <div class="form-group">
             <div class="col-md-6 col-md-offset-10">
               @if($action[1] == 'Update')
@@ -67,7 +67,11 @@
               @endif
               
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-btn glyphicon glyphicon-floppy-saved"></i> {{ $action[1] }}
+                    {{-- */$action = explode('.', $action);
+                    $action = ucwords($action[2]);
+                    /* --}}
+                    {{-- {{dd($action)}} --}}
+                    <i class="fa fa-btn glyphicon glyphicon-floppy-saved"></i> 创建
                 </button>
             </div>
         </div>

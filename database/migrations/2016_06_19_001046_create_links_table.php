@@ -21,9 +21,9 @@ class CreateLinksTable extends Migration
             $table->integer('vote_up')->default(0); // 顶的数量
             $table->integer('vote_down')->default(0); // 踩的数量
             $table->decimal('reddit_score', 28, 10); // 链接得分
-            $table->integer('view_count')->unsigned()->default(0); // 链接评论查看数量
-            $table->integer('click_count')->unsigned()->default(0); // 链接点击(查看)数量
+            $table->integer('views')->unsigned()->default(0); // 查看数量
             $table->integer('comment_count')->unsigned()->default(0); // 链接总评论数
+            $table->integer('collections')->unsigned()->default(0); // 收藏数
             $table->string('topics')->default(''); // 标签，以分号隔开
             $table->string('title'); // 链接标题
             $table->string('url'); // 超链接

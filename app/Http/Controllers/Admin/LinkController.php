@@ -1,27 +1,42 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Debugbar;
-use App\Link;
-use App\Article;
 use Illuminate\Http\Request;
+
+use App\Link;
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
-
-class IndexController extends Controller
+class LinkController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      $links = Link::all();
-    //   dd($links);
-      return view('theme::home.index')->with(compact('links'));
-        //
+        $filter = $request->all();
+        $query = Link::query();
+        
+        // 提问人过滤
+        if (isset($filter['user_id']) && $filter['user_id'] > 0)
+            $query->where('user_id', '=', $filter['user_id']);
+            
+        /*问题标题过滤*/
+        if( isset($filter['word']) && $filter['word'] ){
+            $query->where('title','like', '%'.$filter['word'].'%');
+        }
+        
+        /*提问时间过滤*/
+        if( isset($filter['date_range']) && $filter['date_range'] ){
+            $query->whereBetween('created_at',explode(" - ",$filter['date_range']));
+        }
+        
+        $links = $query->orderBy('created_at','desc')->paginate(20);
+
+        return view('adminTheme::link.index')->with(compact('links'));
     }
 
     /**

@@ -61,7 +61,7 @@ class Link extends Model
      * 获取链接所属用户的信息
      * @return [type] [description]
      */
-    public function userInfo(){
+    public function user(){
       return $this->hasOne('App\User', 'id', 'user_id');
     }
     

@@ -23,8 +23,8 @@
     <div class="container">
       
       {{-- 可以自动获取表单初始值 --}}
-      {!! Form::model($link, ['route' => ['link.edit', $link->id]]) !!} 
-      <form action="{{ route('link.edit', ['id' => $link->id]) }}" method="POST" role="form">
+      {!! Form::model($link, ['route' => ['website.link.edit', $link->id]]) !!} 
+      <form action="{{ route('website.link.edit', ['id' => $link->id]) }}" method="POST" role="form">
         {!! csrf_field() !!}
         
         <div class="form-group">
