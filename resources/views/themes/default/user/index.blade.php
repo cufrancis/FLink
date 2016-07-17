@@ -1,6 +1,10 @@
-@extends('theme::layout.public')
+@extends('theme::layout.space')
 
-@section('content')
+@section('seo')
+    <title>@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我的@else他的@endif首页 - {{ Setting()->get('website_name') }}</title>
+@endsection
+
+@section('space_content')
   <ul>
     <li>{{ $who }}的名称：{{ $userInfo->name }}</li>
     <li>{{ $who }}的简介：{{ $userInfo->desc }}</li>

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Link;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -11,6 +13,7 @@ use Auth;
 use App\Link;
 use App\Http\Requests;
 use App\Tag;
+use Cache;
 
 class LinkController extends Controller
 {
@@ -50,8 +53,9 @@ class LinkController extends Controller
     public function addHead($url){
       if (!preg_match("/^(http|ftp):/", $url)){
         return 'http://'.$url;
-      }
-      
+      } else {
+				return $url;
+			}
     }
 
     /**
@@ -62,7 +66,7 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->tag_list);
+        // dd($request);
         $data = [
           'title' =>  $request->title,
           'url'  =>  $this->addHead($request->url),
@@ -88,7 +92,13 @@ class LinkController extends Controller
      */
     public function show($id)
     {
-        $link = Link::find($id);
+        // $link = Link::find($id);
+        // dd($id);
+        $link = Cache::remember('link.show.'.$id, Setting()->get('website_cache_time'), function() use ($id) {
+            // dd($id);
+            return Link::find($id);
+        });
+        
         return view('theme::link.show')->with(compact('link'));
     }
 
@@ -128,6 +138,7 @@ class LinkController extends Controller
     {
         // dd($request);
         // $linkModel = new Link();
+        // dd($request->user());
         $link = Link::find($id);
         if (!$link)abort(404);
         if ($link->user_id !== $request->user()->id)abort(403);
@@ -142,7 +153,7 @@ class LinkController extends Controller
         // $link->content = $request->content;
         // $link->save();
         
-        return $this->success(route('user.link', ['id' => $link->user_id]), "文章编辑成功！");
+        return $this->success(route('website.user.link', ['id' => $link->user_id]), "文章编辑成功！");
     }
 
     /**

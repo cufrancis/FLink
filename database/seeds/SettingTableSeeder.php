@@ -22,6 +22,10 @@ class SettingTableSeeder extends Seeder
             ['name' =>  'website_icp', 'value' => ''],
             // 网站默认模板
             ['name' =>  'website_theme', 'value' => 'default'],
+            // 缓存
+            ['name' =>  'website_cache_time',   'value' => 1],
+            ['name' =>  'website_header', 'value' => ''],
+            ['name' =>  'website_footer', 'value' => ''],
             
             // 本地时间与服务器时间差
             ['name' => 'time_diff', 'value' =>  '0'],

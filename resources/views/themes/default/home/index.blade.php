@@ -2,7 +2,6 @@
 
 @section('content')
   <ul>
-      {{-- {{dd($links)}} --}}
   @foreach($links as $link)
       {{-- {{dd($link->userInfo)}} --}}
     <div class="">
@@ -16,7 +15,12 @@
         @if($link->published_at)
             {{ $link->published_at->diffForHumans() }}
         @endif
-         <a href="{{ route('website.user.index', $link->user->id) }}">{{ $link->user->name }}</a> 分享于
+        {{-- {{dd($link->topicss)}} --}}
+         <a href="{{ route('auth.space.index', $link->user->id) }}">{{ $link->user->name }}</a> 分享于@if($link->topicss)
+             @foreach($link->topicss as $topics)
+                 <span class="label label-primary">{{ $topics->name }}</span>
+             @endforeach
+         @endif
     </div>
     <hr />
   @endforeach

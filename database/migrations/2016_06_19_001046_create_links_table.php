@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -27,7 +28,7 @@ class CreateLinksTable extends Migration
             $table->string('topics')->default(''); // 标签，以分号隔开
             $table->string('title'); // 链接标题
             $table->string('url'); // 超链接
-            $table->string('content'); // 链接内容
+            $table->string('content')->default(""); // 链接内容
             $table->timestamps();
             $table->timestamp('published_at');
         });

@@ -10,5 +10,9 @@
         {{-- <li><a href="{{ route('admin.topics.create') }}">新增话题</a></li> --}}
         <li><a href="{{ url('admin/link') }}">链接管理</a></li>
     </ul>
+    
+    <ul>
+        <li><a href="{{  route('admin.topics.index')}}">话题管理</a></li>
+    </ul>
 
 @endsection

@@ -7,6 +7,8 @@ use App\Link;
 use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Auth;
+use Cache;
 
 
 class IndexController extends Controller
@@ -18,8 +20,12 @@ class IndexController extends Controller
      */
     public function index()
     {
-      $links = Link::all();
-    //   dd($links);
+
+      // $links = Link::all();
+      $links = Cache::remember('links.index', Setting()->get('website_cache_time'), function() {
+          return Link::all()->sortByDesc("created_at");
+      });
+      // dd($links);
       return view('theme::home.index')->with(compact('links'));
         //
     }

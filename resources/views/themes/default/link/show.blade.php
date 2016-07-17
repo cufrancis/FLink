@@ -1,8 +1,8 @@
 @extends('theme::layout.public')
 
 @section('content')
-<h4><center><a href="{{ route('link.voteUp', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-up
-"></i></a> {{ $link->vote_up }} <a href="{{ route('link.voteDown', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-down
+<h4><center><a href="{{ route('website.link.voteUp', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-up
+"></i></a> {{ $link->vote_up }} <a href="{{ route('website.link.voteDown', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-down
 "></i></a>  <a href="{{ $link->url }}" target="_blank">{{$link->title}}</a> <small>({{$link->url}})</small></center></h4>
 <br />
 
