@@ -27,7 +27,7 @@ class UserController extends Controller
         abort(404);
       }
       $this->user = $user;
-      View::share("userInfo", $user);
+      View::share("user", $user);
     }
     /**
      * Display a listing of the resource.
@@ -120,9 +120,12 @@ class UserController extends Controller
      * @param  int $user_id    用户id
      * @return [type]     [description]
      */
-    public function link($user_id){
-      
-      return view('theme::user/link');
+    public function links($user_id){
+			// dd($user_id);
+      // $user = User::find($user_id);
+			// $userLinks = $this->user->linkData;
+			// dd($userLinks);
+      return view('theme::user/links');
     }
     
     /**
@@ -133,7 +136,7 @@ class UserController extends Controller
       
     }
     
-    public function links() {
-      return view('theme::user.links');
-    }
+    // public function links() {
+    //   return view('theme::user.links');
+    // }
 }

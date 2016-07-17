@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
-    protected $fillable=['title', 'url', 'user_id'];
+    protected $fillable=['title', 'url', 'user_id', 'published_at'];
     protected $dates = ['published_at', 'created_at'];
     
     /**

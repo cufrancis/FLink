@@ -45,14 +45,14 @@
         </div>
         
         {{-- 话题分类： --}}
-        <div class="form-group">
+        {{-- <div class="form-group">
             <select multiple class="form-control" name="topics"> 
                 @foreach($topics as $topic)
                     <option value="">{{ $topic }}</option> 
                 @endforeach
               
             </select>
-        </div>
+        </div> --}}
                 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-10">

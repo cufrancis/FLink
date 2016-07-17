@@ -1,4 +1,4 @@
-`<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -35,12 +35,16 @@ Route::Group(['namespace' => 'Account'], function() {
     // 我发布的链接
     Route::get('/user/{user_id}/links', ['as' => 'auth.space.links', 'uses' => 'UserController@links'])->where(['user_id' => '[0-9]+']);
     Route::get('/user/{user_id}/coins', ['as' => 'auth.space.coins', 'uses' => 'UserController@coins'])->where(['user_id' => '[0-9]+']);
+		
     // 我的经验
     Route::get('/user/{user_id}/exp', ['as' => 'auth.space.exp', 'uses' => 'UserController@exp'])->where(['user_id' => '[0-9]+']);
+		
     // 我的粉丝
     Route::get('/user/{user_id}/followers', ['as' => 'auth.space.followers', 'uses' => 'UserController@followers'])->where(['user_id' => '[0-9]+']);
+		
     // 我的关注
     Route::get('/user/{user_id}/attentions', ['as' => 'auth.space.attentions', 'uses' => 'UserController@attentions'])->where(['user_id' => '[0-9]+']);
+		
     // 我的收藏
     Route::get('/user/{user_id}/collections', ['as' => 'auth.space.collections', 'uses' => 'UserController@collections'])->where(['user_id' => '[0-9]+']);
 });
@@ -54,7 +58,7 @@ Route::get('/', ['as'=>'website.index', 'uses'=> 'IndexController@index']);
 // 用户主页
 // Route::get('/user/{user_id?}', ['as' => 'auth.space.index', 'uses' => 'UserController@index']);
 // 获取所发的链接信息
-Route::get('/user/{user_id?}/link', ['as' => 'website.user.link', 'uses' =>  'UserController@link']);
+// Route::get('/user/{user_id?}/link', ['as' => 'website.user.link', 'uses' =>  'UserController@link']);
 
 // 后台管理
 Route::get('/admin', ['as' => 'website.admin.index', 'uses' => 'AdminController@index']);

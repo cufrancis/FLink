@@ -60,14 +60,15 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $data = [
+				$data = [
           'title' =>  $request->title,
           'url'  =>  $this->addHead($request->url),
           'content' =>  $request->content,
           'user_id' =>  $request->user()->id,
+					'published_at' => Carbon::now(),
         ];
-
+				
+				// 保存数据
         $link = Link::create($data);
         $link->topicss()->attach($request->topics_list);
         
@@ -103,11 +104,12 @@ class LinkController extends Controller
      */
     public function edit($id)
     {
+			
         $link = Link::find($id);
         $date = new Carbon($link->published_at);
         $topics = Topic::lists('name', 'id');
         
-        return view('theme::link/edit')->with(compact('link', 'action', 'topics'));
+        return view('theme::link/edit')->with(compact('link', 'topics'));
     }
 
     /**
@@ -119,15 +121,18 @@ class LinkController extends Controller
      */
     public function update(Request $request, $id)
     {
+			// dd($request);
         $link = Link::find($id);
         if (!$link)abort(404);
         if ($link->user_id !== $request->user()->id)abort(403);
         $request->flash();
+				$data = $request;
+				// dd($data);
 				
         $link->update($request->except('id'));
         $link->topicss()->sync($request->topics_list);
         
-        return $this->success(route('website.user.link', ['id' => $link->user_id]), "文章编辑成功！");
+        return $this->success(route('auth.space.links', ['id' => $link->user_id]), "文章编辑成功！");
     }
 
     /**

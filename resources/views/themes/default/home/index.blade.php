@@ -12,6 +12,7 @@
                 <a href="{{ url('/link', $link->id)}}">{{ $link->title }}</a>
             </h4>
         </li>
+				{{-- {{dd($link->published_at)}} --}}
         @if($link->published_at)
             {{ $link->published_at->diffForHumans() }}
         @endif
