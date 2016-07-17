@@ -95,7 +95,6 @@ class LinkController extends Controller
         // $link = Link::find($id);
         // dd($id);
         $link = Cache::remember('link.show.'.$id, Setting()->get('website_cache_time'), function() use ($id) {
-            // dd($id);
             return Link::find($id);
         });
         
@@ -171,6 +170,8 @@ class LinkController extends Controller
     public function voteUp($link_id){
         $link = new Link;
         $link->voteUp($link_id);
+				Cache::forget('links.index'); // 删除缓存，让首页重建缓存
+				Cache::forget("link.show.".$link_id);
         return redirect()->back();
         // return $this->success(url()->current(), '顶成功');
     }
@@ -178,6 +179,9 @@ class LinkController extends Controller
     public function voteDown($link_id){
         $link = new Link;
         $link->voteDown($link_id);
+				 // 删除缓存，更新数据
+				Cache::forget('links.index');
+				Cache::forget("link.show.".$link_id);
         return redirect()->back();
         // return $this->success(url()->current(), '顶成功');
     }
