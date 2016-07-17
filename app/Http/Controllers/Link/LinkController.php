@@ -34,15 +34,9 @@ class LinkController extends Controller
      */
     public function create()
     {
-    //   $action = [
-    //     'create',
-    //     'Create'
-    //   ];
       $action = Route::currentRouteName(); // 获取当前路由的名称
       $topics = Topic::lists('name', 'id');
-    //   $tags = Tag::lists('name', 'id');
-      
-    //   dd($topics);
+
       return view('theme::link.create')->with(compact('action', 'topics'));
     }
 
@@ -111,17 +105,7 @@ class LinkController extends Controller
     {
         $link = Link::find($id);
         $date = new Carbon($link->published_at);
-        // dd($date);
-
-        // $action = [$link->id.'/update', 'Update'];
-        // $action = Route::all(); // 获取当前路由的名称
-        // dd($action);
         $topics = Topic::lists('name', 'id');
-        // dd($topics);
-        
-        // foreach ($link->topicss as $topicInfo) {
-        //     $topics[]['name'] = $topicInfo->name;
-        // }
         
         return view('theme::link/edit')->with(compact('link', 'action', 'topics'));
     }
@@ -135,22 +119,13 @@ class LinkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
-        // $linkModel = new Link();
-        // dd($request->user());
         $link = Link::find($id);
         if (!$link)abort(404);
         if ($link->user_id !== $request->user()->id)abort(403);
         $request->flash();
-        
-        // $linkModel->updateTags($request->tags, $id);
+				
         $link->update($request->except('id'));
         $link->topicss()->sync($request->topics_list);
-        
-        // $link->title = trim($request->title);
-        // $link->url = $request->url;
-        // $link->content = $request->content;
-        // $link->save();
         
         return $this->success(route('website.user.link', ['id' => $link->user_id]), "文章编辑成功！");
     }

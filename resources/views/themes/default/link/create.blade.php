@@ -44,21 +44,15 @@
             {!! Form::select('topics_list[]',$topics,null,['class'=>'form-control js-example-basic-multiple','multiple'=>'multiple']) !!}
         </div>
         
-        {{-- <div class="form-group">
-            <label for="tags" class="sr-only">标签</label>
-            <input id="tags" type="text" name="tags" class="form-control input-lg" placeholder="输入标签，多个请用逗号隔开" value="@if(isset($link_tags)){{ $link_tags }}@endif"/>
-        </div> --}}
-        
-        <!-- Single button -->
         {{-- 话题分类： --}}
-        {{-- <div class="form-group">
+        <div class="form-group">
             <select multiple class="form-control" name="topics"> 
                 @foreach($topics as $topic)
-                    <option value="">{{ $topic->name }}</option> 
+                    <option value="">{{ $topic }}</option> 
                 @endforeach
               
             </select>
-        </div> --}}
+        </div>
                 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-10">
@@ -67,10 +61,6 @@
               @endif
               
                 <button type="submit" class="btn btn-primary">
-                    {{-- */$action = explode('.', $action);
-                    $action = ucwords($action[2]);
-                    /* --}}
-                    {{-- {{dd($action)}} --}}
                     <i class="fa fa-btn glyphicon glyphicon-floppy-saved"></i> 创建
                 </button>
             </div>

@@ -8,6 +8,7 @@
             <small>管理系统的所有话题</small>
         </h1>
     </section>
+		
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
