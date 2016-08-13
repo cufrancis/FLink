@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Setting;
+use App\Model\Setting;
 use App\Http\Requests;
 
 class AdminController extends Controller

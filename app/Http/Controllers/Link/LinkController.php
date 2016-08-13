@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 use Route;
-use App\Topic;
+use App\Model\Topic;
 use Auth;
-use App\Link;
+use App\Model\Link;
 use App\Http\Requests;
-use App\Tag;
+use App\Model\Tag;
 use Cache;
 
 class LinkController extends Controller
@@ -24,7 +24,7 @@ class LinkController extends Controller
      */
     public function index()
     {
-        // 
+        //
     }
 
     /**
@@ -67,11 +67,11 @@ class LinkController extends Controller
           'user_id' =>  $request->user()->id,
 					'published_at' => Carbon::now(),
         ];
-				
+
 				// 保存数据
         $link = Link::create($data);
         $link->topicss()->attach($request->topics_list);
-        
+
         if($link){
           return $this->success(route('website.index', ['id'  =>  $link->id]), "发布成功！");
         } else {
@@ -92,7 +92,7 @@ class LinkController extends Controller
         $link = Cache::remember('link.show.'.$id, Setting()->get('website_cache_time'), function() use ($id) {
             return Link::find($id);
         });
-        
+
         return view('theme::link.show')->with(compact('link'));
     }
 
@@ -104,11 +104,11 @@ class LinkController extends Controller
      */
     public function edit($id)
     {
-			
+
         $link = Link::find($id);
         $date = new Carbon($link->published_at);
         $topics = Topic::lists('name', 'id');
-        
+
         return view('theme::link/edit')->with(compact('link', 'topics'));
     }
 
@@ -128,10 +128,10 @@ class LinkController extends Controller
         $request->flash();
 				$data = $request;
 				// dd($data);
-				
+
         $link->update($request->except('id'));
         $link->topicss()->sync($request->topics_list);
-        
+
         return $this->success(route('auth.space.links', ['id' => $link->user_id]), "文章编辑成功！");
     }
 
@@ -144,9 +144,9 @@ class LinkController extends Controller
     public function destroy($id)
     {
       Link::destroy($id);
-      return $this->success(route('user.link', ['id' => Auth::user()->id]), "文章删除成功！");  
+      return $this->success(route('user.link', ['id' => Auth::user()->id]), "文章删除成功！");
     }
-    
+
     public function voteUp($link_id){
         $link = new Link;
         $link->voteUp($link_id);
@@ -155,7 +155,7 @@ class LinkController extends Controller
         return redirect()->back();
         // return $this->success(url()->current(), '顶成功');
     }
-    
+
     public function voteDown($link_id){
         $link = new Link;
         $link->voteDown($link_id);

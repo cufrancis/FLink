@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use Overtrue\Pinyin\Pinyin;
-use App\Topic;
+use App\Model\Topic;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -33,7 +33,7 @@ class TopicsController extends Controller
 
 
         // $tags = $query->orderBy('updated_at','desc')->paginate(20);
-        
+
         $topics = $query->orderBy('updated_at', 'desc')->paginate(20);
         return view("adminTheme::topics.index")->with(compact('topics'));
     }
@@ -45,7 +45,7 @@ class TopicsController extends Controller
      */
     public function create()
     {
-        
+
         return view('adminTheme::topics.create');
     }
 
@@ -65,7 +65,7 @@ class TopicsController extends Controller
             'desc'  =>  $request->desc,
         ];
         $topics = Topic::create($data);
-        
+
         if($topics){
           return $this->success(route('admin.topics.index'), "发布成功！");
         } else {

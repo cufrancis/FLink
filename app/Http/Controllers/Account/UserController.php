@@ -7,14 +7,14 @@ use App\Http\Controllers\Controller;
 
 use View;
 use Auth;
-use App\User;
+use App\Model\User;
 use App\Http\Requests;
 
 class UserController extends Controller
 {
-    
+
     protected $user;
-    
+
     /**
      * 构造函数，用来获取传入的id并从数据库中获取数据，在UserController全局可用
      * @param Request $request [description]
@@ -22,7 +22,7 @@ class UserController extends Controller
     public function __construct(Request $request) {
       $userId = $request->route()->parameter('user_id');
       $user = User::with('linkData')->find($userId);
-      
+
       if (!$user){
         abort(404);
       }
@@ -36,14 +36,14 @@ class UserController extends Controller
      */
     public function index($id)
     {
-      
+
       // 查看的是不是自己的信息
       if (Auth::check()){
           $who = ($this->user->id == Auth::user()->id ? '我' : '他');
       } else {
         $who = '他';
       }
-     
+
       return view('theme::user.index')->with(compact('who'));
     }
 
@@ -77,7 +77,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        
+
         return view('theme::user.show')->with(compact('user'));
     }
 
@@ -114,7 +114,7 @@ class UserController extends Controller
     {
         //
     }
-    
+
     /**
      * 显示$id用户分享的所有link
      * @param  int $user_id    用户id
@@ -127,15 +127,15 @@ class UserController extends Controller
 			// dd($userLinks);
       return view('theme::user/links');
     }
-    
+
     /**
      * 我的金币
      * @return [type] [description]
      */
     public function coins() {
-      
+
     }
-    
+
     // public function links() {
     //   return view('theme::user.links');
     // }

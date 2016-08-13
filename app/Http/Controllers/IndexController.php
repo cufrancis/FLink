@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Debugbar;
-use App\Link;
-use App\Article;
+use App\Model\Link;
+use App\Model\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
@@ -23,7 +23,7 @@ class IndexController extends Controller
       $links = Cache::remember('links.index', Setting()->get('website_cache_time'), function() {
           return Link::all()->sortByDesc("created_at");
       });
-			
+
       return view('theme::home.index')->with(compact('links'));
         //
     }
