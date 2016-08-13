@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        if ( App::environment() == 'production' ){
+            exit('这是生产环境！！不想干了？？');
+        }
         $this->call(UserTableSeeder::class);
         $this->call(LinkTableSeeder::class);
         $this->call(TopicTableSeeder::class);

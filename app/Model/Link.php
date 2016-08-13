@@ -62,7 +62,7 @@ class Link extends Model
      * @return [type] [description]
      */
     public function user(){
-      return $this->hasOne('App\User', 'id', 'user_id');
+      return $this->hasOne('App\Model\User', 'id', 'user_id');
     }
 
     /**
@@ -77,7 +77,7 @@ class Link extends Model
     // }
 
     public function tags(){
-        return $this->belongsToMany('App\Tag', 'link_tags')->withTimestamps();
+        return $this->belongsToMany('App\Model\Tag', 'link_tags')->withTimestamps();
     }
 
     /**
@@ -86,7 +86,7 @@ class Link extends Model
      */
     public function topicss(){
         // return $this->belongsToMany('App\Topic', 'link_topics', 'link_id', 'topic_id')->withTimestamps();
-        return $this->belongsToMany('App\Topic', 'link_topics')->withTimestamps();
+        return $this->belongsToMany('App\Model\Topic', 'link_topics')->withTimestamps();
     }
 
 
