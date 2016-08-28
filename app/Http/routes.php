@@ -10,23 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('test', function () {
-    clock()->startEvent('event_name', 'LaravelAcademy.org'); //事件名称，显示在Timeline中
-
-    clock('Message text.'); //在Clockwork的log中显示'Message text.'
-    logger('Message text.'); //也Clockwork的log中显示'Message text.'
-
-    clock(array('hello' => 'world')); //以json方式在log中显示数组
-    //如果对象实现了__toString()方法则在log中显示对应字符串，
-    //如果对象实现了toArray方法则显示对应json格式数据，
-    //如果都没有则将对象转化为数组并显示对应json格式数据
-    // clock(new Object());
-
-    clock()->endEvent('event_name');
-});
-
 Route::auth();
+
 Route::Group(['namespace' => 'Account'], function() {
     // Route::get('login', ['as' => 'auth.user.login', 'uses' => 'AuthController@login']);
     // Route::get('logout',['as'=>'auth.user.logout','uses'=>'AuthController@logout']);
@@ -35,16 +20,16 @@ Route::Group(['namespace' => 'Account'], function() {
     // 我发布的链接
     Route::get('/user/{user_id}/links', ['as' => 'auth.space.links', 'uses' => 'UserController@links'])->where(['user_id' => '[0-9]+']);
     Route::get('/user/{user_id}/coins', ['as' => 'auth.space.coins', 'uses' => 'UserController@coins'])->where(['user_id' => '[0-9]+']);
-		
+
     // 我的经验
     Route::get('/user/{user_id}/exp', ['as' => 'auth.space.exp', 'uses' => 'UserController@exp'])->where(['user_id' => '[0-9]+']);
-		
+
     // 我的粉丝
     Route::get('/user/{user_id}/followers', ['as' => 'auth.space.followers', 'uses' => 'UserController@followers'])->where(['user_id' => '[0-9]+']);
-		
+
     // 我的关注
     Route::get('/user/{user_id}/attentions', ['as' => 'auth.space.attentions', 'uses' => 'UserController@attentions'])->where(['user_id' => '[0-9]+']);
-		
+
     // 我的收藏
     Route::get('/user/{user_id}/collections', ['as' => 'auth.space.collections', 'uses' => 'UserController@collections'])->where(['user_id' => '[0-9]+']);
 });
@@ -75,13 +60,13 @@ Route::get('/testsss', ['as' => 'website.image.avatar', 'uses' => 'IndexControll
 
 // 文章管理模块
 Route::Group(['namespace' => 'Link'], function(){
-    
+
     // 查看链接
-    Route::get('/link/{id}', ['as' => 'website.link.detail', 'uses' => 'LinkController@show'])->where(['id'=>'[0-9]+']);
-    
+    // Route::get('/link/{id}', ['as' => 'website.link.detail', 'uses' => 'LinkController@show'])->where(['id'=>'[0-9]+']);
+
     // 需要登陆的部分
     Route::Group(['middleware' => 'auth'], function (){
-        
+
         // 创建链接
         Route::get('/link/create', ['as' => 'website.link.create', 'uses' => 'LinkController@create']);
         Route::post('/link/create', 'LinkController@store');
@@ -113,7 +98,7 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin', 'middleware' => ['auth']],
     Route::post('link/destroy', ['as' => 'admin.link.destroy', 'uses' => 'LinkController@destroy']);
     // link管理
     Route::resource('link', 'LinkController', ['only' => ['index', 'edit', 'update']]);
-    
+
     // 话题删除
     Route::any('topics/destroy', ['as' => 'admin.topics.destroy', 'uses' => 'TopicsController@destroy']);
     // 话题管理

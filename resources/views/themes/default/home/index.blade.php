@@ -7,9 +7,11 @@
     <div class="">
         <li>
             <h4>
-                <a href="{{ route('website.link.voteUp', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-up"></i></a>{{ $link->vote_up }} 
-                <a href="{{ route('website.link.voteDown', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-down"></i></a> | 
-                <a href="{{ url('/link', $link->id)}}">{{ $link->title }}</a>
+                <a href="{{ route('website.link.voteUp', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-up"></i></a>{{ $link->vote_up }}
+                <a href="{{ route('website.link.voteDown', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-down"></i></a> |
+                <a href="{{ $link->url }}" target="_blank">{{ $link->title }}</a>
+                <!-- 如果在用户收藏链接中没有此链接，则显示添加收藏，如果有，则显示已收藏，并且不可点击 -->
+                <div><small>添加收藏</small></div>
             </h4>
         </li>
 				{{-- {{dd($link->published_at)}} --}}
@@ -29,5 +31,5 @@
 @endsection
 
 @section('footer')
-    
+
 @endsection
