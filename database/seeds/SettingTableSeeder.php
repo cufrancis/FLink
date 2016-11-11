@@ -23,10 +23,10 @@ class SettingTableSeeder extends Seeder
             // 网站默认模板
             ['name' =>  'website_theme', 'value' => 'default'],
             // 缓存
-            ['name' =>  'website_cache_time',   'value' => 1],
+            ['name' =>  'website_cache_time',   'value' => 0],
             ['name' =>  'website_header', 'value' => ''],
             ['name' =>  'website_footer', 'value' => ''],
-            
+
             // 本地时间与服务器时间差
             ['name' => 'time_diff', 'value' =>  '0'],
             // 时区设置
@@ -35,7 +35,7 @@ class SettingTableSeeder extends Seeder
             ['name' =>  'time_format', 'value'  =>  'H:i'],
             // 人性化时间格式
             ['name' => 'time_friendly', 'value' => '1'],
-            
+
             // 日期格式
             ['name' =>  'date_format', 'value'  =>  'Y-m-d'],
 
