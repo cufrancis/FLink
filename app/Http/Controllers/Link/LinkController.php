@@ -62,7 +62,8 @@ class LinkController extends Controller
     {
 				$data = [
           'title' =>  $request->title,
-          'url'  =>  $this->addHead($request->url),
+        //   'url'  =>  $this->addHead($request->url),
+          'url' =>  $request->url,
           'content' =>  $request->content,
           'user_id' =>  $request->user()->id,
 					'published_at' => Carbon::now(),
