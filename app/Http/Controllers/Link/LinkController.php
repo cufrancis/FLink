@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use App\Model\User;
 use Carbon\Carbon;
 use Route;
 use App\Model\Topic;
@@ -165,5 +166,16 @@ class LinkController extends Controller
 				Cache::forget("link.show.".$link_id);
         return redirect()->back();
         // return $this->success(url()->current(), '顶成功');
+    }
+
+    public function collection($link_id){
+        // dd($this->user);
+        $this->user->link_collections()->attach($link_id);
+        return $this->success(route('website.index'), "收藏成功！");
+    }
+
+    public function deCollection($link_id){
+        $this->user->link_collections()->detach($link_id);
+        return $this->success(route('website.index'), "取消收藏成功！");
     }
 }

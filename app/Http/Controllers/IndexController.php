@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\User;
+use View;
 use Debugbar;
 use App\Model\Link;
 use App\Model\Article;
@@ -13,6 +15,13 @@ use Cache;
 
 class IndexController extends Controller
 {
+
+    public function __construct(){
+        $user = Auth::user();
+
+        $this->user = $user;
+        View::share("user", $user);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +32,10 @@ class IndexController extends Controller
     //   $links = Cache::remember('links.index', Setting()->get('website_cache_time'), function() {
           $links = Link::all()->sortByDesc("created_at");
     //   });
+    //   $user = User::find(1);
+    //   dd($this->user->isLinkCollection(1));
+
+    //   dd($this->user->link_collections()->where('link_id', 2)->get()); //用户收藏链接
 
       return view('theme::home.index')->with(compact('links'));
         //

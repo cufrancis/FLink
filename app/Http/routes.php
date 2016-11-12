@@ -34,6 +34,8 @@ Route::Group(['namespace' => 'Account'], function() {
     Route::get('/user/{user_id}/collections', ['as' => 'auth.space.collections', 'uses' => 'UserController@collections'])->where(['user_id' => '[0-9]+']);
 });
 
+
+
 Route::get('/home', 'HomeController@index');
 
 Route::get('/', ['as'=>'website.index', 'uses'=> 'IndexController@index']);
@@ -63,6 +65,10 @@ Route::Group(['namespace' => 'Link'], function(){
 
     // 查看链接
     // Route::get('/link/{id}', ['as' => 'website.link.detail', 'uses' => 'LinkController@show'])->where(['id'=>'[0-9]+']);
+    // 收藏链接
+    Route::get('/link/{link_id}/collection', ['as' => 'website.link.collection', 'uses' => 'LinkController@collection']);
+    // 取消收藏
+    Route::get('/link/{link_id}/deCollection', ['as' => 'website.link.deCollection', 'uses' => 'LinkController@deCollection']);
 
     // 需要登陆的部分
     Route::Group(['middleware' => 'auth'], function (){
