@@ -11,12 +11,20 @@
                 <a href="{{ route('website.link.voteDown', $link->id) }}"><i class="fa fa-btn glyphicon glyphicon-thumbs-down"></i></a> |
                 <a href="{{ $link->url }}" target="_blank">{{ $link->title }}</a>
                 <!-- 如果在用户收藏链接中没有此链接，则显示添加收藏，如果有，则显示已收藏，并且不可点击 -->
-
-                @if($user->isLinkCollection($link->id))
-                    <div><small>已收藏（<a href="{{ route('website.link.deCollection', $link->id) }}">取消收藏</a>）</small></div>
+                @if(!Auth::guest())
+                    @if(!Auth::guest() && $user->isLinkCollection($link->id))
+                        <div><small>已收藏（<a href="{{ route('website.link.deCollection', $link->id) }}">取消收藏</a>）</small></div>
+                    @else
+                        <div><small><a href="{{ route('website.link.collection', $link->id) }}">收藏链接</a></small></div>
+                    @endif
                 @else
                     <div><small><a href="{{ route('website.link.collection', $link->id) }}">收藏链接</a></small></div>
                 @endif
+                {{-- @if(!Auth::guest() && $user->isLinkCollection($link->id))
+                    <div><small>已收藏（<a href="{{ route('website.link.deCollection', $link->id) }}">取消收藏</a>）</small></div>
+                @else
+                    <div><small><a href="{{ route('website.link.collection', $link->id) }}">收藏链接</a></small></div>
+                @endif --}}
             </h4>
         </li>
 				{{-- {{dd($link->published_at)}} --}}

@@ -65,10 +65,7 @@ Route::Group(['namespace' => 'Link'], function(){
 
     // 查看链接
     // Route::get('/link/{id}', ['as' => 'website.link.detail', 'uses' => 'LinkController@show'])->where(['id'=>'[0-9]+']);
-    // 收藏链接
-    Route::get('/link/{link_id}/collection', ['as' => 'website.link.collection', 'uses' => 'LinkController@collection']);
-    // 取消收藏
-    Route::get('/link/{link_id}/deCollection', ['as' => 'website.link.deCollection', 'uses' => 'LinkController@deCollection']);
+
 
     // 需要登陆的部分
     Route::Group(['middleware' => 'auth'], function (){
@@ -86,6 +83,11 @@ Route::Group(['namespace' => 'Link'], function(){
         Route::get('/link/{link_id}/voteUp', ['as' => 'website.link.voteUp', 'uses' => 'LinkController@voteUp']);
         // 踩
         Route::get('/link/{link_id}/voteDown', ['as' => 'website.link.voteDown', 'uses' => 'LinkController@voteDown']);
+
+        // 收藏链接
+        Route::get('/link/{link_id}/collection', ['as' => 'website.link.collection', 'uses' => 'LinkController@collection']);
+        // 取消收藏
+        Route::get('/link/{link_id}/deCollection', ['as' => 'website.link.deCollection', 'uses' => 'LinkController@deCollection']);
     });
 });
 
