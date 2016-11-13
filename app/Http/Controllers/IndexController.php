@@ -30,8 +30,10 @@ class IndexController extends Controller
     public function index()
     {
     //   $links = Cache::remember('links.index', Setting()->get('website_cache_time'), function() {
-          $links = Link::all()->sortByDesc("created_at");
+          $links = Link::paginate(8);
     //   });
+    //   dd($links->links());
+
 
       return view('theme::home.index')->with(compact('links'));
         //

@@ -41,7 +41,9 @@
     <hr />
   @endforeach
   </ul>
+  {!! $links->links() !!}
 @endsection
+
 
 @section('footer')
 
