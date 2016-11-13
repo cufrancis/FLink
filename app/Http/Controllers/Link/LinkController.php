@@ -169,13 +169,13 @@ class LinkController extends Controller
     }
 
     public function collection($link_id){
-        // dd($this->user);
-        $this->user->link_collections()->attach($link_id);
+        // dd(Auth::user());
+        Auth::user()->link_collections()->attach($link_id);
         return $this->success(route('website.index'), "收藏成功！");
     }
 
     public function deCollection($link_id){
-        $this->user->link_collections()->detach($link_id);
+        Auth::user()->link_collections()->detach($link_id);
         return $this->success(route('website.index'), "取消收藏成功！");
     }
 }
