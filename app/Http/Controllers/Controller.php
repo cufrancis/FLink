@@ -17,13 +17,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
-    public function __construct(){
-        $user = Auth::user();
-
-        $this->user = $user;
-        View::share("user", $user);
-    }
-
     /**
      * 操作成功提示
      * @param $url string

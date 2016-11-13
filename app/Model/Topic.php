@@ -9,6 +9,6 @@ class Topic extends Model
     protected $fillable = ['name', 'desc'];
 
     public function links(){
-        return $this->belongsToMany('App\Link', 'link_topics');
+        return $this->belongsToMany('App\Model\Link', 'link_topics');
     }
 }

@@ -34,7 +34,7 @@
         {{-- {{dd($link->topicss)}} --}}
          <a href="{{ route('auth.space.index', $link->user->id) }}">{{ $link->user->name }}</a> 分享于@if($link->topicss)
              @foreach($link->topicss as $topics)
-                 <span class="label label-primary">{{ $topics->name }}</span>
+                 <span class="label label-primary"><a href="{{route('website.topic.index', $topics->id)}}">{{ $topics->name }}</a></span>
              @endforeach
          @endif
     </div>

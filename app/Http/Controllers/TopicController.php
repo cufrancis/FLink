@@ -2,39 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\User;
-use View;
-use Debugbar;
-use App\Model\Link;
-use App\Model\Article;
 use Illuminate\Http\Request;
+
+use App\Model\Topic;
 use App\Http\Requests;
-use Auth;
-use Cache;
 
-
-class IndexController extends Controller
+class TopicController extends Controller
 {
-
-    public function __construct(){
-        $user = Auth::user();
-
-        $this->user = $user;
-        View::share("user", $user);
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($topic_id)
     {
-    //   $links = Cache::remember('links.index', Setting()->get('website_cache_time'), function() {
-          $links = Link::all()->sortByDesc("created_at");
-    //   });
+        $topic = Topic::findOrFail($topic_id);
 
-      return view('theme::home.index')->with(compact('links'));
-        //
+
+        // dd($topic->links);
+        return view('theme::topic.index')->with(compact('topic'));
     }
 
     /**

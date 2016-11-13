@@ -56,7 +56,6 @@ class User extends Authenticatable
      */
     public function isLinkCollection($link_id){
         // return $this->link_collections()->where('link_id', 2)->first();
-        //
 
         if ($this->link_collections()->where('link_id', $link_id)->first() == null){
             return false; // 未收藏

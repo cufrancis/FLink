@@ -40,6 +40,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/', ['as'=>'website.index', 'uses'=> 'IndexController@index']);
 
+// 话题
+Route::get('/topics/{topic_id}', ['as' => 'website.topic.index', 'uses' => 'TopicController@index']);
+
 // 文章
 // 用户
 // 用户主页
